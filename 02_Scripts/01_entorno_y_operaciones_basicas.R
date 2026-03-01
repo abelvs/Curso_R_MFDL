@@ -1,125 +1,67 @@
 ############################################
-# Operaciones básicas con tidyverse
+# 1. Hola mundo
 ############################################
 
-library(tidyverse)
-library(data.table)
-library(janitor)
-library(readxl)
-library(openxlsx)
+print("Hola mundo")
 
 
-#Cargamos el dataset----
+############################################
+# 2. Crear objetos
+############################################
 
-df <- fread("01_Inputs/Sesion_1/Airbnb.csv") %>% 
-  clean_names() 
+x <- 10
+y <- 5
 
-#Recomendaciones de exploracion inicial----
-
-summary(df)
-glimpse(df)
-
-table(df$country_name)
+x
+y
 
 
-# Creamos columnas de interés (mutate)----
+############################################
+# 3. Aritmética básica
+############################################
 
-#Manejo de strings
-df_coords <- df %>% 
-  mutate(coordenadas = paste0(latitude, ", ", longitude))
-
-df_nombre_ubic <- df %>%
-  mutate(nom_ubicacion = paste(city, state, country_name, sep = ", "))
-
-table(df_nombre_ubic$nom_ubicacion)
-
-
-#Operaciones numéricas
-
-df_agg_score <- df %>% mutate(agg_score = (guest_satisfaction_score+cleanliness_score)/2)
-
-mean(df_agg_score$agg_score)
-
-df_agg_score <- df %>% mutate(agg_score = (guest_satisfaction_score/10 + cleanliness_score) / 2)
-
-mean(df_agg_score$agg_score)
-
-#Uso de vectores para mutate()
-
-tipo_de_cambio <- 17.23
-
-df_mxn <- df %>%  
-  mutate(price_mxn = price_total * tipo_de_cambio)
-
-mean(df_mxn$price_mxn)
-
-#Condicionales
-
-hist(df$distance_city_center)
-
-df_central <- df %>% 
-  mutate(es_centrico = ifelse(distance_city_center <= 5, 1,0))
-
-summary(df$distance_city_center)
-
-df_central_cats <- df_central %>% 
-  mutate(cat_distancia_centro = case_when(distance_city_center >= 10 ~ "Muy lejos",
-                                          distance_city_center > 5 & distance_city_center < 10 ~ "Lejos",
-                                          distance_city_center > 2 & distance_city_center <= 5 ~ "Cerca",
-                                          distance_city_center > 1 & distance_city_center <= 2 ~ "Muy cerca",
-                                          distance_city_center <= 1 ~ "En el centro",
-                                          TRUE ~ NA_character_)) %>%
-  select(distance_city_center, cat_distancia_centro, es_centrico)
-
-head(df_central_cats, 20)
-
-tabyl(df_central$es_centrico)
-
-#Recodficaciones
-
-df_recode <- df %>% 
-  mutate(country_name = recode(country_name, "Holy See (Vatican City State)" = "Vatican City"))
-
-table(df_recode$country_name)
+x + y     # suma
+x - y     # resta
+x * y     # multiplicación
+x / y     # división
+x ^ 2     # potencia
+x %% y    # módulo (residuo)
+x %/% y   # división entera
 
 
-#Agrupaciones y summarize
+############################################
+# 4. Objetos y vectores
+############################################
 
-df_tablas <- df %>% 
-  mutate(cat_distancia_centro = case_when(distance_city_center >= 10 ~ "Muy lejos",
-                                          distance_city_center > 5 & distance_city_center < 10 ~ "Lejos",
-                                          distance_city_center > 2 & distance_city_center <= 5 ~ "Cerca",
-                                          distance_city_center > 1 & distance_city_center <= 2 ~ "Muy cerca",
-                                          distance_city_center <= 1 ~ "En el centro",
-                                          TRUE ~ NA_character_)) %>%
-  mutate(country_name = recode(country_name, "Holy See (Vatican City State)" = "Vatican City")) %>% 
-  mutate(price_mxn = price_total * tipo_de_cambio) %>% 
-  select(country_name, city, distance_city_center, cat_distancia_centro, price_mxn)
+# Vector numérico
+numeros <- c(1, 2, 3, 4, 5)
+numeros
 
-df_tablas_grouped <- df_tablas %>% 
-  group_by(country_name, cat_distancia_centro)
+# Vector de texto
+nombres <- c("Jesus", "Abel", "Maria")
+nombres
 
+# Longitud del vector
+length(nombres)
 
-tabla_paises_distancia_precio <- df_tablas %>% 
-  group_by(city) %>% 
-  summarise(total = n(),
-            distancia_promedio = mean(distance_city_center, na.rm = T),
-            precio_promedio = mean(price_mxn, na.rm = T),
-            precio_minimo = min(price_mxn, na.rm = T),
-            precio_maximo = max(price_mxn, na.rm = T))
+# Acceso por posición
+nombres[1]       # primer elemento
+numeros[3]       # tercer elemento
 
-tabla_categorias <- df_tablas %>% 
-  group_by(cat_distancia_centro) %>% 
-  summarise(total = n(),
-            precio_promedio = mean(price_mxn, na.rm =T),
-            precio_maximo = max(price_mxn, na.rm = T),
-            precio_minimo = min(price_mxn, na.rm = T)) %>% 
-  arrange(-precio_promedio)
+# Operaciones elemento a elemento
+numeros * 2
+
+# Filtrar usando lógica
+numeros[numeros > 3]   # devuelve 4 y 5
 
 
-plot(df$distance_city_center,
-        df$price_total)
+############################################
+# 5. Tipos básicos de objetos
+############################################
 
+class(numeros)   # numeric
+class(nombres)   # character
+class(TRUE)      # logical
 
 
 
