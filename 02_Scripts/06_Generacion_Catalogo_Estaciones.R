@@ -1,8 +1,9 @@
 pacman::p_load("tidyverse", "data.table", "readxl", "janitor", "sf", "writexl", "stringi")
 
 #Cargamos shape alcaldias
-shape_munis <- st_read("01_Inputs/Sesion_2/Shape_Alcaldias/00mun.shp") %>% 
+shape_munis <- st_read("01_Inputs/Sesion_2/Shape_CDMX/shape_munis_cdmx.shp") %>% 
   filter(CVE_ENT == "09")
+
 
 #Cargamos primer archivo de lluvias
 lluvias_ene <- fread("01_Inputs/Sesion_2/Lluvias_CONAGUA/ene.csv", encoding = "Latin-1") %>% 
