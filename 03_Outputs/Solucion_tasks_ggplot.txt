@@ -1,0 +1,67 @@
+Solucion task 1 Viz
+
+1. 
+df %>% 
+  ggplot(aes(x = percchildbelowpovert, y = perchsd))+
+  geom_point(aes(size = poptotal, color = state))+
+  geom_smooth(method = "lm", color = "grey90", se = F)
+
+ 
+2. 
+df %>% 
+  ggplot(aes(x = percchildbelowpovert, y = perchsd))+
+  geom_point(aes(size = poptotal, color = state))+
+  geom_smooth(method = "lm", color = "grey90", se = F)+
+  scale_color_brewer(palette = "Dark2")
+
+3. 
+df %>% 
+    ggplot(aes(x = percchildbelowpovert, y = perchsd))+
+    geom_point(aes(size = poptotal, color = state))+
+    geom_smooth(method = "lm", color = "grey90", se = F)+
+    scale_color_brewer(palette = "Dark2")+
+    scale_x_continuous(labels = label_percent(scale = 1)) +
+    scale_y_continuous(labels = label_percent(scale = 1)) 
+
+4. 
+
+df %>% 
+  ggplot(aes(x = percchildbelowpovert, y = perchsd))+
+  geom_point(aes(size = poptotal, color = state))+
+  geom_smooth(method = "lm", color = "grey90", se = F)+
+  scale_color_brewer(palette = "Dark2")+
+  scale_x_continuous(labels = label_percent(scale = 1)) +
+  scale_y_continuous(labels = label_percent(scale = 1)) +
+  labs(title = "Pobreza infantil vs educación media superior",
+       subtitle = "Condados del Midwest (EE.UU.)",
+       x = "Porcentaje de pobreza infantil",
+       y = "Porcentaje con educación media superior",
+       color = "Estado",
+       size = "Población total") 
+
+5.   
+
+df %>% 
+  ggplot(aes(x = percchildbelowpovert, y = perchsd))+
+  geom_point(aes(size = poptotal, color = state))+
+  geom_smooth(method = "lm", color = "grey90", se = F)+
+  scale_color_brewer(palette = "Dark2")+
+  scale_x_continuous(labels = label_percent(scale = 1)) +
+  scale_y_continuous(labels = label_percent(scale = 1)) +
+  labs(title = "Pobreza infantil vs educación media superior",
+       subtitle = "Condados del Midwest (EE.UU.)",
+       x = "Porcentaje de pobreza infantil",
+       y = "Porcentaje con educación media superior",
+       color = "Estado",
+       size = "Población total") +
+  theme_minimal()+
+  theme(plot.background = element_rect(fill = "#0B0F14", colour = NA),
+        panel.background = element_rect(fill = "#0B0F14"),
+        plot.title = element_text(face = "bold", size = 18, color = "white"),
+        plot.subtitle = element_text(size = 12, color = "gray70"),
+        axis.title = element_text(face = "bold", color = "white"),
+        axis.text = element_text(color = "gray80"),
+        legend.key = element_rect(fill = "#0B0F14", color = NA),
+        legend.title = element_text(face = "bold", color = "white"),
+        legend.text = element_text(color = "gray80"),
+        legend.position = "bottom")
