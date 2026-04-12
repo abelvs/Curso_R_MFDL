@@ -43,20 +43,14 @@ points(df$longitude, df$latitude, col = "#c234bd")
 
 
 
-#Task: Crear plot que cuente el n de sismos por mes
+#Task: Crear plot de sismos
 
+world_map <- map_data("world")
 
 df_plot <- df %>% 
   mutate(mes = month(time))
 
 df_plot %>% 
-  ggplot()
-
-
-
-
-
-
-
-
-
+  ggplot(aes(x = longitude,
+             y = latitude))+
+  geom_point()
