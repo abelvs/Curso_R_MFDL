@@ -1,0 +1,27 @@
+Identifier: 
+
+Title: Encuesta Nacional de Confianza en la Administración Pública 2025. Datos oportunos.
+
+Description: La Encuesta Nacional de Confianza en la Administración Pública (ENCOAP) 2025 tiene como objetivo contar con un instrumento comparable entre países que permita entender la relación entre confianza institucional y gobernanza democrática para mejorar el gobierno y fomentar las expectativas positivas de los ciudadanos de 18 años y más frente a las instituciones públicas.
+
+Modified: 2026-04-16.
+
+Publisher: Instituto Nacional de Estadística y Geografía, INEGI.
+
+Mbox: atencion.usuarios@inegi.org.mx
+
+License: https://www.inegi.org.mx/inegi/terminos.html
+
+DataDictionary: 
+  
+Keyword: "Confianza", "confianza interpersonal", "confianza en instituciones públicas", "capacidad de respuesta", "confiabilidad", "integridad", "apertura", "imparcialidad", "satisfacción con los servicio públicos", "retos a largo plazo", "participación política".
+
+ContactPoint: Mtro. J. Armando Aguiar Rodríguez, 800 111 4634.
+
+Temporal: 2025-09-2025-10.
+
+Spatial: Estados Unidos Mexicanos.
+
+AccrualPeriodicity: No determinada.
+
+Distribution: https://www.inegi.org.mx/programas/encoap/2025/
